@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Traffic Light</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .traffic-light {
+            width: 120px;
+            padding: 20px;
+            margin: 0 auto 20px;
+            background: #333;
+            border-radius: 20px;
+        }
+        .light {
+            width: 70px;
+            height: 70px;
+            margin: 10px auto;
+            border-radius: 50%;
+            background: #111; /* off */
+        }
+        .on-red { background: red; }
+        .on-yellow { background: yellow; }
+        .on-green { background: green; }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Traffic Light Simulator</h1>
+
+    <div class="traffic-light">
+        <div id="red" class="light"></div>
+        <div id="yellow" class="light"></div>
+        <div id="green" class="light"></div>
+    </div>
+
+    <button id="nextBtn">Next Light</button>
+
+    <script>
+        // variable to track current light
+        let currentLight = "red";
+
+        const redLight = document.getElementById("red");
+        const yellowLight = document.getElementById("yellow");
+        const greenLight = document.getElementById("green");
+        const btn = document.getElementById("nextBtn");
+
+        // function to update which light is ON
+        function updateLights() {
+            // turn all off
+            redLight.className = "light";
+            yellowLight.className = "light";
+            greenLight.className = "light";
+
+            // turn one on based on currentLight
+            if (currentLight === "red") {
+                redLight.classList.add("on-red");
+            } else if (currentLight === "green") {
+                greenLight.classList.add("on-green");
+            } else if (currentLight === "yellow") {
+                yellowLight.classList.add("on-yellow");
+            }
+        }
+
+        // initial state
+        updateLights();
+
+        // event handling: button click changes the light
+        btn.addEventListener("click", function () {
+            // decide next light using if-else
+            if (currentLight === "red") {
+                currentLight = "green";
+            } else if (currentLight === "green") {
+                currentLight = "yellow";
+            } else if (currentLight === "yellow") {
+                currentLight = "red";
+            }
+
+            updateLights();
+        });
+    </script>
+
+</body>
+</html>
