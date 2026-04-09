@@ -1,0 +1,39 @@
+<h1>Experiment 7: Add Items</h1>
+
+<form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title" />
+
+    <div *ngIf="title?.touched && title?.invalid" class="error">
+      <small *ngIf="title?.errors?.['required']">Title is required.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="description">Description</label>
+    <textarea id="description" rows="3" formControlName="description"></textarea>
+
+    <div *ngIf="description?.touched && description?.invalid" class="error">
+      <small *ngIf="description?.errors?.['required']">Description is required.</small>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="itemForm.invalid">
+    Add Item
+  </button>
+</form>
+
+<hr />
+
+<h2>Items List</h2>
+
+<div *ngIf="items.length === 0">
+  <p>No items yet. Please add one.</p>
+</div>
+
+<ul>
+  <li *ngFor="let item of items">
+    <strong>{{ item.title }}</strong> - {{ item.description }}
+  </li>
+</ul>
